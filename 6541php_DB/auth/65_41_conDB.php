@@ -84,7 +84,7 @@ WHERE persons.id = :id";
         $_SESSION['User'] = $row['id'];
         $_SESSION['role'] = $row['role'];
         echo "<script>console.log('Login Successfully')</script>";
-        header("Location: ../ex08_user_showdata.php");
+        header("Location: ../user/index.php");
         exit(); // Ensure no further output after redirect
       }
     } else {

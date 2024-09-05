@@ -6,8 +6,8 @@ if (!isset($_SESSION['role'])) {
     exit();
 }
 
-if (isset($_SESSION['User'])) {
-    header('Location: ../ex08_user_showdata.php');
+if (isset($_SESSION['Admin'])) {
+    header('Location: ../admin/index.php');
     exit();
 }
 

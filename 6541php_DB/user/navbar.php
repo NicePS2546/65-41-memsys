@@ -3,8 +3,8 @@ require_once "../auth/65_41_conDB.php";
 if (session_status() === PHP_SESSION_NONE) {
   session_start();
 }
-$admin_id = $_SESSION['Admin'];
-$row = $server->getSoleJoin($connect, $admin_id);
+$user_id = $_SESSION['User'];
+$row = $server->getSoleJoin($connect, $user_id);
 ?>
 
 <!-- Navbar -->
