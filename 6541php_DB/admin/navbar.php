@@ -1,9 +1,9 @@
 <?php
-require_once "../auth/65_41_conDB.php";
+require_once "../auth/db_config.php";
 if (session_status() === PHP_SESSION_NONE) {
   session_start();
 }
-$admin_id = $_SESSION['Admin'];
+$admin_id = $_SESSION['id'];
 $row = $server->getSoleJoin($connect, $admin_id);
 ?>
 

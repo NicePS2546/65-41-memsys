@@ -24,7 +24,7 @@
           </a>
         </li>
         <li class="nav-item">
-          <a href="index.php" class="nav-link">
+          <a href="show_member.php" class="nav-link">
             <i class="nav-icon fas fa-chart-pie"></i>
             จัดการข้อมูลสมาชิก
             </p>

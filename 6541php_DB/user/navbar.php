@@ -1,5 +1,5 @@
 <?php
-require_once "../auth/65_41_conDB.php";
+require_once "../auth/db_config.php";
 if (session_status() === PHP_SESSION_NONE) {
   session_start();
 }
