@@ -2,7 +2,7 @@
 $servername = 'localhost';
 $DBusername = 'root';
 $DBpassword = '';
-$dataBaseName = 'db67_6541_member';
+$dataBaseName = 'db67_6541_memsys';
 $tableName = 'tb_users';
 
 class Server
@@ -169,6 +169,7 @@ WHERE id = :id";
 $server = new Server($servername, $DBusername, $DBpassword, $dataBaseName, $tableName);
 
 $connect = $server->getConnection();
+$conn = $server->getConnection();
 
 
 ?>

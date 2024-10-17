@@ -1,24 +1,11 @@
 <?php
-require_once '../db_config.php';
-
+require_once "../auth/db_config.php";
 if (session_status() === PHP_SESSION_NONE) {
   session_start();
-  }
-  
-if (isset($_SESSION['id'])) {
-  $user_id = $_SESSION['id'];
-
-  $sql = "SELECT persons.*, tb_users.* FROM persons
-  LEFT JOIN tb_users ON persons.id = tb_users.person_id
-  WHERE persons.id = ?";
-
-  $stmt = $conn->prepare($sql);
-  $stmt->bindParam(1, $user_id);
-  $stmt->execute();
-  $row = $stmt->fetch(PDO::FETCH_ASSOC);
 }
+$user_id = $_SESSION['User'];
+$row = $server->getSoleJoin($connect, $user_id);
 ?>
-
 
 <!-- Navbar -->
 <nav class="main-header navbar navbar-expand navbar-white navbar-white">
@@ -34,4 +21,3 @@ if (isset($_SESSION['id'])) {
   </ul>
 </nav>
 <!-- /.navbar -->
- 

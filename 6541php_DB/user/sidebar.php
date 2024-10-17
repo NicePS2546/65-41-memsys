@@ -1,11 +1,38 @@
+<?php
+require_once '../db_config.php';
+if (session_status() === PHP_SESSION_NONE) {
+  session_start();
+}
+if (isset($_SESSION['id'])) {
+  $user_id = $_SESSION['id'];
+  $sql = "SELECT persons.*, tb_users.* FROM persons
+LEFT JOIN tb_users ON persons.id = tb_users.person_id
+WHERE persons.id = ?";
+  $stmt = $conn->prepare($sql);
+  $stmt->bindParam(1, $user_id);
+  $stmt->execute();
+  $us = $stmt->fetch(PDO::FETCH_ASSOC);
+  extract($us); // ไม่ตอ้งสร้างตวัแปรมารองรับ เรียกใชผ้า่ นชื่อฟิลดไ์ ดเ้ลย
+  $imageURL = '../assets/dist/avatar/' . $avatar;
+}
+// ตรวจสอบวา่ มีการอปัโหลดรูปภาพหรือไม่ถา้ไม่มีให้ใชรู้ปภาพตวัอยา่ งแทน
+$imageURL = !empty($avatar) ? $imageURL : '../assets/dist/avatar/user1.jpg';
+?>
+
+
+
+
 <!-- Main Sidebar Container -->
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
   <!-- Brand Logo -->
-  <a href="index3.html" class="brand-link">
-    <img src="../assets/dist/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3"
-      style="opacity: .8">
-    <span class="brand-text font-weight-light">AdminLTE 3</span>
+  <a href="#" class="brand-link">
+    <div style="display: flex; flex-direction: column; align-items: center;">
+      <img src="<?php echo $imageURL ?>" style="width: 50%; max-width: 150px; height: auto;" class="img-circle ">
+      <!-- <br> -->
+      <span class="brand-text font-weight-light"><?php echo $us['fname'] . ' ' . $us['lname']; ?></span>
+    </div>
   </a>
+
 
   <!-- Sidebar -->
   <div class="sidebar">
@@ -18,31 +45,25 @@
 
         <li class="nav-item">
           <a href="index.php" class="nav-link">
-            <i class="nav-icon fas fa-home"></i>
-            หน้าหลัก
-            </p>
-          </a>
-        </li>
-        <li class="nav-item">
-          <a href="index.php" class="nav-link">
-            <i class="nav-icon fas fa-chart-pie"></i>
-            จัดการข้อมูลสมาชิก
-            </p>
-          </a>
-        </li>
-        <li class="nav-item">
-          <a href="tmp_form.php" class="nav-link">
-            <i class="nav-icon far fa-edit"></i>
+            <i class="nav-icon fas fa-home" style="color: gold;"></i>
             <p>
-              จัดการข้อมูลประเภทกลุ่ม
+              หน้าหลัก
             </p>
           </a>
         </li>
         <li class="nav-item">
-          <a href="tmp_form.php" class="nav-link">
-            <i class="nav-icon far fa-edit"></i>
+          <a href="update_profile.php" class="nav-link">
+            <i class="nav-icon fas fa-chart-pie" style="color: gold;"></i>
             <p>
-              จัดการข้อมูลกลุ่มย่อย
+              แก้ไขข้อมูลส่วนตัว
+            </p>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a href="change_password.php" class="nav-link">
+            <i class="nav-icon far fa-edit" style="color: gold;"></i>
+            <p>
+              เปลี่ยนรหัสผ่าน
             </p>
           </a>
         </li>
@@ -50,30 +71,30 @@
           <a href="tmp_datatable.php" class="nav-link">
             <i class="nav-icon fas fa-border-all"></i>
             <p>
-              จัดการข้อมูลชมรม
+              แสดงข้อมูลกิจกรรม
             </p>
           </a>
         </li>
         <li class="nav-item">
-          <a href="tmp_datatable.php" class="nav-link">
-            <i class="nav-icon fas fa-border-all"></i>
+          <a href="admin.php" class="nav-link">
+            <i class="nav-icon fas fa-users"></i>
             <p>
-              จัดการข้อมูลกิจกรรม
+              แสดงข้อมูลชมรม
             </p>
           </a>
         </li>
         <li class="nav-item">
-          <a href="tmp_datatable.php" class="nav-link">
-            <i class="nav-icon fas fa-user"></i>
+          <a href="admin.php" class="nav-link">
+            <i class="nav-icon fas fa-cat"></i>
             <p>
-              จัดการเข้าร่วมกิจกรรม
+              ลงทะเรียนกิจกรรม
             </p>
           </a>
         </li>
 
         <li class="nav-item">
-          <a href="../auth/logout.php" class="nav-link">
-            <i class="nav-icon fas fa-door-open"></i>
+          <a href="../logout.php" class="nav-link">
+            <i class="nav-icon fas fa-door-open" style="color: gold;"></i>
             <p>
               Logout
             </p>
